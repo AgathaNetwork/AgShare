@@ -1,0 +1,4 @@
+name: AgShare
+version: '1.0'
+main: cn.org.agatha.agShare.AgShare
+api-version: '1.21'
