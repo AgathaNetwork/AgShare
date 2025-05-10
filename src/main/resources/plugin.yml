@@ -2,3 +2,16 @@ name: AgShare
 version: '1.0'
 main: cn.org.agatha.agShare.AgShare
 api-version: '1.21'
+commands:
+  share:
+    description: 向玩家发送背包分享请求
+    usage: /share <player>
+  shareacc:
+    description: 接受背包分享请求
+    usage: /shareacc
+  sharedeny:
+    description: 拒绝背包分享请求
+    usage: /sharedeny
+  sharecancel:
+    description: 取消自己发出的背包分享请求
+    usage: /sharecancel
