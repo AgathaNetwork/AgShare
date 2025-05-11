@@ -107,8 +107,8 @@ public final class AgShare extends JavaPlugin implements Listener {
         pendingRequests.put(sUUID, tUUID);
         incomingRequests.put(tUUID, sUUID);
 
-        sender.sendMessage("已向 §6" + target.getName() + " 发送背包查看请求。");
-        target.sendMessage("玩家 §6" + sender.getName() + " 想查看你的背包，请输入 /shareacc 接受，/sharedeny 拒绝。");
+        sender.sendMessage("已向 §6" + target.getName() + " §r发送背包查看请求。");
+        target.sendMessage("玩家 §6" + sender.getName() + " §r想查看你的背包，请输入 /shareacc 接受，/sharedeny 拒绝。");
     }
 
     // 处理 /shareacc
@@ -130,7 +130,7 @@ public final class AgShare extends JavaPlugin implements Listener {
         }
 
         openCustomInventory(requester, receiver);
-        requester.sendMessage("你正在查看 §6" + receiver.getName() + " 的背包。");
+        requester.sendMessage("你正在查看 §6" + receiver.getName() + " §r的背包。");
 
         clearRequests(requesterUUID, rUUID);
     }
@@ -147,9 +147,9 @@ public final class AgShare extends JavaPlugin implements Listener {
         UUID requesterUUID = incomingRequests.get(rUUID);
         Player requester = getServer().getPlayer(requesterUUID);
 
-        receiver.sendMessage("你已拒绝来自 §6" + (requester != null ? requester.getName() : "未知玩家") + " 的背包查看请求。");
+        receiver.sendMessage("你已拒绝来自 §6" + (requester != null ? requester.getName() : "未知玩家") + " §r的背包查看请求。");
         if (requester != null && requester.isOnline()) {
-            requester.sendMessage("玩家 §6" + receiver.getName() + " 拒绝了你的请求。");
+            requester.sendMessage("玩家 §6" + receiver.getName() + " §r拒绝了你的请求。");
         }
 
         clearRequests(requesterUUID, rUUID);
@@ -168,7 +168,7 @@ public final class AgShare extends JavaPlugin implements Listener {
         Player target = getServer().getPlayer(targetUUID);
 
         if (target != null && target.isOnline()) {
-            target.sendMessage("玩家 §6" + player.getName() + " 取消了对你的请求。");
+            target.sendMessage("玩家 §6" + player.getName() + " §r取消了对你的请求。");
         }
 
         clearRequests(pUUID, targetUUID);
@@ -199,15 +199,17 @@ public final class AgShare extends JavaPlugin implements Listener {
         for (int i = 45; i < 54; i++) {
             customInventory.setItem(i, new ItemStack(Material.GRAY_STAINED_GLASS_PANE));
         }
-
+        customInventory.setItem(49, new ItemStack(Material.BEDROCK));
         requester.openInventory(customInventory);
     }
 
     // 监听库存点击事件，禁止操作
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getView().getTitle().startsWith(ChatColor.AQUA + "查看:")) {
-            event.setCancelled(true); // 阻止所有操作
+        if (event.getInventory().getItem(49) != null) {
+            if (event.getInventory().getItem(49).getType() == Material.BEDROCK){
+                event.setCancelled(true);
+            }
         }
     }
 }
