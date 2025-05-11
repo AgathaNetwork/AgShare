@@ -183,7 +183,7 @@ public final class AgShare extends JavaPlugin implements Listener {
 
     // 自定义打开对方背包的方法（6x9 格子）
     public void openCustomInventory(Player requester, Player receiver) {
-        String title = ChatColor.AQUA + "查看: " + receiver.getName();
+        String title = receiver.getName();
         Inventory customInventory = Bukkit.createInventory(null, 54, title);
 
         ItemStack[] contents = receiver.getInventory().getContents();
