@@ -95,7 +95,7 @@ public final class AgShare extends JavaPlugin implements Listener {
         }
 
         if (pendingRequests.containsKey(sUUID)) {
-            sender.sendMessage("你已经发送了一个请求，请先取消或等待回应。");
+            sender.sendMessage("你已经发送了一个请求，请先等待回应或输入 /sharecancel 取消。");
             return;
         }
 
@@ -107,7 +107,7 @@ public final class AgShare extends JavaPlugin implements Listener {
         pendingRequests.put(sUUID, tUUID);
         incomingRequests.put(tUUID, sUUID);
 
-        sender.sendMessage("已向 §6" + target.getName() + " §r发送背包查看请求。");
+        sender.sendMessage("已向 §6" + target.getName() + " §r发送背包查看请求，如需取消，请输入 /sharecancel。");
         target.sendMessage("玩家 §6" + sender.getName() + " §r想查看你的背包，请输入 /shareacc 接受，/sharedeny 拒绝。");
     }
 
